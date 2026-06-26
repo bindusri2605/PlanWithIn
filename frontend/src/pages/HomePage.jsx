@@ -87,6 +87,11 @@ const HomePage = () => {
 
       const data = await res.json();
       console.log("PLAN DATA:", data);
+      if (data.status === "FAILED") {
+  setStatus("idle");
+  setError(data.error || "No plan found");
+  return;
+}
       const hasData = data && Object.keys(data).length > 0;
 
       if (!hasData) {

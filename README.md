@@ -189,7 +189,7 @@ http://localhost:3000
 
 ## 👩‍💻 Author
 
-**Sahithi B**
+**Bindu sri Duggisetty**
 Aspiring Full-Stack Engineer
 
 Built to explore the intersection of:

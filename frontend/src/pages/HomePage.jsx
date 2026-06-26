@@ -87,7 +87,7 @@ const HomePage = () => {
 
       const data = await res.json();
       console.log("PLAN DATA:", data);
-      if (data.status === "FAILED") {
+      if (data?.status?.trim()?.toUpperCase() === "FAILED") { {
   setStatus("idle");
   setError(data.error || "No plan found");
   return;
@@ -99,7 +99,11 @@ const HomePage = () => {
         setError("No suitable places found. Try increasing time or selecting different preferences.");
         return;
       }
-
+if (!data.steps || data.steps.length === 0) {
+  setStatus("idle");
+  setError("No valid plan returned from server.");
+  return;
+}
       const activePlan = data;
       sessionStorage.setItem("planData", JSON.stringify({ activePlan, planType: "optimal" }));
       navigate("/plan", { state: { activePlan, planType: "optimal" } });

@@ -101,12 +101,12 @@ const HomePage = () => {
       }
 const steps = data.bestPlan?.steps || data.steps;
 
-if (!steps || steps.length === 0) {
+if (!data.bestPlan?.steps || data.bestPlan.steps.length === 0) {
   setStatus("idle");
   setError("No valid plan returned from server.");
   return;
 }
-      const activePlan = data;
+      const activePlan = data.bestPlan;
       sessionStorage.setItem("planData", JSON.stringify({ activePlan, planType: "optimal" }));
       navigate("/plan", { state: { activePlan, planType: "optimal" } });
     } catch (err) {

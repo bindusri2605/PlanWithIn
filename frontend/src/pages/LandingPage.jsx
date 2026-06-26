@@ -102,7 +102,7 @@ const LandingPage = () => {
           </div>
           
           <div className="flex flex-wrap justify-center gap-8 md:gap-12 text-[11px] font-black tracking-[0.15em] text-[#2C3E50]/50 uppercase">
-            <a href="mailto:sahithi3105@gmail.com" className="hover:text-[#B2C5B2] transition-colors flex items-center gap-2">
+            <a href="mailto:bindusriduggisetty@gmail.com" className="hover:text-[#B2C5B2] transition-colors flex items-center gap-2">
               <span className="text-[#B2C5B2] text-sm">@</span> Contact
             </a>
             <a href="/" className="hover:text-[#B2C5B2] transition-colors">Privacy</a>

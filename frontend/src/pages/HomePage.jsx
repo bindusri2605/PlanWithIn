@@ -99,8 +99,6 @@ const HomePage = () => {
         setError("No suitable places found. Try increasing time or selecting different preferences.");
         return;
       }
-const steps = data.bestPlan?.steps || data.steps;
-
 const activePlan = data.bestPlan || data;
 
 if (!activePlan?.steps || activePlan.steps.length === 0) {

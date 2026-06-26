@@ -99,7 +99,9 @@ const HomePage = () => {
         setError("No suitable places found. Try increasing time or selecting different preferences.");
         return;
       }
-if (!data.steps || data.steps.length === 0) {
+const steps = data.bestPlan?.steps || data.steps;
+
+if (!steps || steps.length === 0) {
   setStatus("idle");
   setError("No valid plan returned from server.");
   return;

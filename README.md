@@ -29,7 +29,7 @@ It transforms uncertainty into structured exploration.
 ## 🌐 Live Demo
 
 ```
-https://plan-with-in.vercel.app/
+[https://plan-with-in.vercel.app/](https://plan-with-in-one.vercel.ap)
 ```
 
 ---

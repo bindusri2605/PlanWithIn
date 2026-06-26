@@ -110,7 +110,7 @@ useEffect(() => {
         steps: planData.activePlan.steps,
         address: state?.addressName || "Exploration Trip"
       };
-      const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+      const API_BASE_URL = "https://planwithin-backend.onrender.com";
       const response = await axios.post(`${API_BASE_URL}/api/plans/save`, payload);
       if (response.data.status === "SUCCESS") {
         showToast("Trip saved to history!");

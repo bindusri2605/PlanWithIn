@@ -9,7 +9,7 @@ const HistoryPage = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:5000";
+  const API_BASE = "https://planwithin-backend.onrender.com";
 
   // INTERNAL SAGE GREEN TOAST
   const showToast = (message, icon = "success") => {

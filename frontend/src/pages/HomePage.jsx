@@ -68,7 +68,7 @@ const HomePage = () => {
     setError("");
 
     // SMART URL SELECTION: Use Vercel variable if it exists, otherwise use Localhost
-    const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+    const API_BASE_URL = "https://planwithin-backend.onrender.com";
 
     try {
       // Combined the URL variable with your specific endpoint path

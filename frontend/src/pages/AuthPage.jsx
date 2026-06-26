@@ -9,7 +9,7 @@ const AuthPage = () => {
   const [formData, setFormData] = useState({ name: "", email: "", password: "" });
   
   const navigate = useNavigate();
-  const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:5000";
+  const API_BASE = "https://planwithin-backend.onrender.com";
 
   // --- RESTORED ALERT FUNCTIONALITY ---
   const showToast = (message, icon) => {

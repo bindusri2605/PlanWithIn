@@ -87,7 +87,7 @@ const HomePage = () => {
 
       const data = await res.json();
       console.log("PLAN DATA:", data);
-      if (data?.status?.trim()?.toUpperCase() === "FAILED") { {
+      if (data?.status?.trim()?.toUpperCase() === "FAILED") { 
   setStatus("idle");
   setError(data.error || "No plan found");
   return;

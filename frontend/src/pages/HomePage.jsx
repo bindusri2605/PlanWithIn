@@ -86,6 +86,7 @@ const HomePage = () => {
       });
 
       const data = await res.json();
+      console.log("PLAN DATA:", data);
       const hasData = data && Object.keys(data).length > 0;
 
       if (!hasData) {

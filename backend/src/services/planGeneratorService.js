@@ -31,43 +31,53 @@ async function generatePlan(userInput, placesByPreference, getRoute) {
 
   console.log(`🚀 Planning Engine Started: ${remainingTime}m available, Budget: ${remainingBudget}`);
 
-  // 2. Chaining Logic: Iterate through user preferences to build the sequence
+  let addedPlace = true;
+
+while (remainingTime > 60 && addedPlace) {
+  addedPlace = false;
+
   for (const pref of userInput.preferences || []) {
     const options = placesByPreference[pref] || [];
     let chosenPlace = null;
     let routeToPlace = null;
 
-    // Filter to avoid duplicate visits
-    const availableOptions = options.filter(p => !visitedNames.has(p.name));
+    const availableOptions = options.filter(
+      p => !visitedNames.has(p.name)
+    );
 
     for (const place of availableOptions) {
       try {
         const route = await getRoute({
           from: currentLocation,
-          to: { lat: parseFloat(place.lat), lng: parseFloat(place.lng) }
+          to: {
+            lat: parseFloat(place.lat),
+            lng: parseFloat(place.lng)
+          }
         });
 
-        // Heuristic: Activity duration + travel time + 30m traffic/parking buffer
         const activityDuration = place.averageTime || 60;
-        const neededTime = route.travelTimeMinutes + activityDuration + 30; 
-        const neededCost = route.travelCost + (place.averageSpend || 0);
+        const neededTime =
+          route.travelTimeMinutes + activityDuration + 30;
 
-        // Validation against constraints
-        if (neededTime <= remainingTime && (remainingBudget === Infinity || neededCost <= remainingBudget)) {
+        const neededCost =
+          route.travelCost + (place.averageSpend || 0);
+
+        if (
+          neededTime <= remainingTime &&
+          (remainingBudget === Infinity ||
+            neededCost <= remainingBudget)
+        ) {
           chosenPlace = place;
           routeToPlace = route;
-          break; // Greedily select the first feasible option
+          break;
         }
       } catch (err) {
-        console.error(`⚠️ Routing failed for ${place.name}:`, err.message);
         continue;
       }
     }
 
     if (!chosenPlace) continue;
 
-    // 3. Step Generation
-    // TRAVEL STEP
     steps.push({
       action: "TRAVEL",
       description: `Head towards ${chosenPlace.name}`,
@@ -77,7 +87,6 @@ async function generatePlan(userInput, placesByPreference, getRoute) {
       provider: "OpenRouteService"
     });
 
-    // ACTIVITY STEP
     steps.push({
       action: "ACTIVITY",
       description: `${pref.toUpperCase()}: ${chosenPlace.name}`,
@@ -86,9 +95,14 @@ async function generatePlan(userInput, placesByPreference, getRoute) {
       cost: chosenPlace.averageSpend || 0
     });
 
-    // 4. Update Trackers
-    const legTime =routeToPlace.travelTimeMinutes +(chosenPlace.averageTime || 60) +30;
-    const legCost = routeToPlace.travelCost + (chosenPlace.averageSpend || 0);
+    const legTime =
+      routeToPlace.travelTimeMinutes +
+      (chosenPlace.averageTime || 60) +
+      30;
+
+    const legCost =
+      routeToPlace.travelCost +
+      (chosenPlace.averageSpend || 0);
 
     remainingTime -= legTime;
     remainingBudget -= legCost;
@@ -96,9 +110,14 @@ async function generatePlan(userInput, placesByPreference, getRoute) {
     totalCostUsed += legCost;
 
     visitedNames.add(chosenPlace.name);
-    currentLocation = { lat: chosenPlace.lat, lng: chosenPlace.lng };
-  }
+    currentLocation = {
+      lat: chosenPlace.lat,
+      lng: chosenPlace.lng
+    };
 
+    addedPlace = true;
+  }
+}
   // 5. Success Check
   if (steps.length === 0) {
     return {

@@ -34,7 +34,7 @@ const PlanResult = ({ activePlan, planType, onBack }) => {
     }
 
     const userData = JSON.parse(userStr);
-    const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:5000";
+   const API_BASE = "https://planwithin-backend.onrender.com";
 
     setIsSaving(true);
 

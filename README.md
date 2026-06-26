@@ -28,11 +28,7 @@ It transforms uncertainty into structured exploration.
 
 ## 🌐 Live Demo
 
-```
-https://plan-with-in-one.vercel.app/
-```
-
----
+[Visit PlanWithIn](https://plan-with-in-one.vercel.app/)
 
 ## ✨ Features
 

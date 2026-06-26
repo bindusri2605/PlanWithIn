@@ -87,7 +87,7 @@ async function generatePlan(userInput, placesByPreference, getRoute) {
     });
 
     // 4. Update Trackers
-    const legTime = routeToPlace.travelTimeMinutes + (chosenPlace.averageTime || 60);
+    const legTime =routeToPlace.travelTimeMinutes +(chosenPlace.averageTime || 60) +30;
     const legCost = routeToPlace.travelCost + (chosenPlace.averageSpend || 0);
 
     remainingTime -= legTime;
